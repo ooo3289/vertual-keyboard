@@ -1,0 +1,1 @@
+{"version":3,"file":"style.css","mappings":"AAAA,EACI,SACJ,CAEA,IACI,WACJ","sources":["webpack://reactpractice/./src/css/style.css"],"sourcesContent":["p {\n    color: red;\n}\n\ndiv {\n    width: 100px;\n}"],"names":[],"sourceRoot":""}
