@@ -1,0 +1,26 @@
+{
+  "name": "reactpractice",
+  "version": "1.0.0",
+  "description": "My first experience with react.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ooo3289/reactPractice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ooo3289/reactPractice/issues"
+  },
+  "homepage": "https://github.com/ooo3289/reactPractice#readme",
+  "devDependencies": {
+    "terser-webpack-plugin": "^5.3.7",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.13.2"
+  }
+}
