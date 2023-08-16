@@ -5,6 +5,8 @@ export class Keyboard {
     #keyboardEl;
     #inputGroupEl;
     #inputEl;
+    #keyPress = false;
+    #mouseDown = false;
 
     constructor() {
         this.#assignElement();
@@ -26,12 +28,14 @@ export class Keyboard {
         document.addEventListener("keydown", this.#onKeyDown.bind(this))
         document.addEventListener("keyup", this.#onKeyUp.bind(this))
         this.#inputEl.addEventListener("input", this.#onInput)
-        this.#keyboardEl.addEventListener("mousedown", this.#onMouseDown)
+        this.#keyboardEl.addEventListener("mousedown", this.#onMouseDown.bind(this))
         // 키보다 밖에서 마우스를 뗄 수도 있고 다양한 변수가 있기 때문에 document에 걸었음
         document.addEventListener("mouseup", this.#onMouseUp.bind(this))
     }
 
     #onMouseUp(event) {
+        if (this.#keyPress) return;
+        this.#mouseDown = false;
         const keyEl = event.target.closest("div.key");
         // !! 느낌표 두개를 붙여줘서 확실하게 boolean 값이 출력될 수 있도록 처리
         const isActive = !!keyEl?.classList.contains("active")
@@ -51,6 +55,9 @@ export class Keyboard {
     }
 
     #onMouseDown(event) {
+        // 키가 눌려진 상태면 더이상 아래 코드들에 접근하지 못하도록 Return 시킨다.
+        if (this.#keyPress) return;
+        this.#mouseDown = true;
         event.target.closest("div.key")?.classList.add("active");
     }
 
@@ -59,11 +66,15 @@ export class Keyboard {
     }
 
     #onKeyDown(event) {
+        if (this.#mouseDown) return;
+        this.#keyPress = true;
         this.#inputGroupEl.classList.toggle("error", /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(event.key));
         this.#keyboardEl.querySelector(`[data-code=${event.code}]`)?.classList.add("active");
     }
 
     #onKeyUp(event) {
+        if (this.#mouseDown) return;
+        this.#keyPress = false;
         this.#keyboardEl.querySelector(`[data-code=${event.code}]`)?.classList.remove("active");
     }
 
